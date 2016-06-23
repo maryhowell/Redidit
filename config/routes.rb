@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :boards
   resources :posts, except: [:edit, :update] do
-  resources :posts, shallow: true
+  
 
   end
 

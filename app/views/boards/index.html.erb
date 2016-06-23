@@ -1,18 +1,37 @@
-<table class="table table-hover table-striped table-condensed">
-  <h2>Your Boards</h2>
-  <!-- <a href="/lists/new">Add a List</a> -->
-  <!-- <%= link_to "Add a List", "/lists/new" %> -->
-  <%= link_to "Add a Board", new_board_path %>
-
-  <ul>
-    <% @board.each do |board| %>
-      <li>
-        <%= link_to board.name, board %>
-
-        
-        <%= link_to "X", board_path(board), method: :delete %>
-        <%= link_to "Edit", edit_board_path(board) %>
-      </li>
-    <% end %>
-  </ul>
 </table>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div class="table-responsive">
+    <h2>Your Boards</h2>
+    <p><%= link_to "Add a Board", new_board_path %></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @board.each do |board| %>
+        <tr class="active">
+          <td><%= @board.name %></td>
+          <td>
+            <%= link_to "See Board", board_path(board), class: "btn btn-default btn-xs" %>
+            <%= link_to 'Update', edit_board_path(board), class: "btn btn-default btn-xs" %>
+            <%= link_to 'Delete', board_path(board), method: :delete, class: "btn btn-default btn-xs" %>
+            <%end%>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

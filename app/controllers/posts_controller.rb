@@ -7,17 +7,12 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.post.new
-    # authorize @post
-  end
-
-  def show
-    @post = Post.find params[:id]
-
+    @post = Posts.new
+  # @board = Board.find(params[:board_id])
   end
 
   def create
-      # @board = Board.new(name: params[:board][:name])
+    @board = Board.find(params[:board_id])
     @post = @board.posts.new approved_params
     # authorize @post
     if @post.save
@@ -27,6 +22,11 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
+
+    def show
+      @post = Posts.find(params[:id])
+    end
 
   def destroy
   end
