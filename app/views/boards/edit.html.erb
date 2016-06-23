@@ -1,0 +1,14 @@
+<% provide(:title, 'Edit your Board') %>
+<h1>Edit your board</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @board, url: edit_board_path do |f| %>
+
+      <%= f.label :name%>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <button class="btn btn-primary">Post</button>
+    <% end %>
+  </div>
+</div>
