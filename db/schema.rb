@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160623182803) do
     t.datetime "updated_at"
   end
 
-  create_table "post", force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.integer  "board_id"
