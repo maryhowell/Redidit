@@ -18,3 +18,7 @@
  #comment {
    padding: 5px;
  }
+
+p {
+  font-weight: bold;
+}

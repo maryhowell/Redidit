@@ -1,2 +1,18 @@
 <h2><%= @board.name%></h2>
-<%= link_to "write a post", new_post_path%>
+  <%= form_for @board, url: new_post_path, method: :get do |f| %>
+  <%= f.hidden_field :board_id, value: @board.id %>
+  <button class="btn btn-primary">Write a Post</button>
+<% end %>
+
+
+<% @board.posts.each do |post| %>
+<div class="well well-lg">
+  <tr class="active">
+    <p>Title:</p>
+    <td><%= post.title %></td>
+    <p>Content:</p>
+    <td class="well well-lg"><%= post.content %></td>
+    <%= link_to 'Delete', post_path(post), method: :delete, class: "btn btn-default btn-xs" %>
+  </tr>
+</div>
+<%end%>

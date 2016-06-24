@@ -1,21 +1,35 @@
-<% provide(:title, 'Edit your Post') %>
-<h1>Edit your poste</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Post Message</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for :post, url: new_post_path do |f| %>
+    <form role="form">
+      <div class="form-group">
+        <h1>Post Message</h1>
 
-      <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control' %>
+        <div class="row">
+          <div class="col-md-6 col-md">
+            <%= form_for @post, url: new_post_path(@post) do |f| %>
+            <%= f.label :title%>
+            <%= f.text_field :title, class: 'form-control' %>
+          <textarea class="form-control" rows="5" id="comment" style = "margin: 5px;"></textarea>
+          <button class="btn btn-primary">Post</button>
 
-      <%= f.label :content %>
-      <%= f.email_field :content, class: 'form-control' %>
+            <% end %>
+          </div>
+        </div>
 
-      <%= f.label :board %>
-      <%= f.password_field :board, class: 'form-control' %>
-
-      <button class="btn btn-primary">Post</button>
-    <% end %>
+      </div>
+    </form>
   </div>
-</div>
-<% end %>
+
+  </body
+  </html>
