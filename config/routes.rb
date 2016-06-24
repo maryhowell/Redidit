@@ -5,9 +5,14 @@ Rails.application.routes.draw do
   root                'static_pages#home'
 
   resources :boards
-  resources :posts, except: [:edit, :update] do
-  
 
-  end
+
+    resources :posts do
+      member do
+        put "like", to: "posts#upvote"
+        put "dislike", to: "posts#downvote"
+      end
+    end
+
 
 end

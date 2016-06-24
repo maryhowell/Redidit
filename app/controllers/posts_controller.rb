@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
-  @board = Board.find(params[:board][:board_id])
+    @board = Board.find(params[:board][:board_id])
   end
 
   def create
@@ -24,17 +24,37 @@ class PostsController < ApplicationController
   end
 
 
-    def show
-      @post = Post.find(params[:id])
-    end
+  def show
+    @post = Post.find(params[:id])
+  end
 
   def destroy
+    @post = Post.find params[:id]
+    # authorize @board
+    @post.destroy
+    redirect_to "/boards"
   end
+
+  def upvote
+    @post = Post.find(params[:id])
+    @post.upvote_by current_user
+    redirect_to "/boards"
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    @post.downvote_by current_user
+    redirect_to "/boards"
+  end
+
+
 
   private
 
   def approved_params
     params.require(:post).permit(:title, :content, :board_id, :user_id)
   end
+
+
 
 end

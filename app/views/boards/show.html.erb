@@ -12,7 +12,15 @@
     <td><%= post.title %></td>
     <p>Content:</p>
     <td class="well well-lg"><%= post.content %></td>
+    <div>
     <%= link_to 'Delete', post_path(post), method: :delete, class: "btn btn-default btn-xs" %>
+    <div><%=post.get_upvotes.size%></div>
+    <%= link_to 'upvote', like_post_path(post), method: :put %>
+    <div><%=post.get_downvotes.size%></div>
+    <%= link_to "downvote", dislike_post_path(post), method: :put %>
+
+
+    </div
   </tr>
 </div>
 <%end%>

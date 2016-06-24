@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 has_many :posts
 # has_many :posts, through: :boards
+acts_as_voter
 
 
 end
