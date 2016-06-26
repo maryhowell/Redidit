@@ -1,11 +1,13 @@
 class BoardsController < ApplicationController
   skip_before_action :authenticate_user!
+  before_action :set_user, except: [:destroy, :index, :edit, :update]
 
   def index
     @board = Board.all
   end
 
   def new
+    authorize @user
     @board = Board.new
     # authorize @board
   end
@@ -26,6 +28,7 @@ class BoardsController < ApplicationController
 end
 
 def destroy
+  authorize @user
   @board = Board.find params[:id]
   # authorize @board
   @board.destroy
@@ -33,6 +36,11 @@ def destroy
 
 end
 
+private
+
+def set_user
+  @user = current_user
+end
 
 
 end
