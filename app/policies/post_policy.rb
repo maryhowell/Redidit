@@ -8,11 +8,11 @@ class MessagePolicy < ApplicationPolicy
   end
 
   def update?
-    is_user? || is_admin? || is_mod?
+    is_user? || is_admin?
   end
 
   def destroy?
-    is_user? || is_admin? || is_mod?
+    is_user? || is_admin? 
   end
 
   private
