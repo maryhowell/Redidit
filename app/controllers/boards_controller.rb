@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  skip_after_action :verify_authorized
   skip_before_action :authenticate_user!
   before_action :set_user, except: [:destroy, :index, :edit, :update]
 

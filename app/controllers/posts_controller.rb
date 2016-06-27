@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   # before_action :set_list, only: [:new, :create]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @post = current_user.posts
