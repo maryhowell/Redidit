@@ -47,19 +47,23 @@ $(document).ready(function() {
 
   var result = $(".result");
 
-  $("#add").click(function() {
+resultColor = function( count, result ) {
+  if (count < 10){
+    result.removeClass("red");
+  }
+  else {
+    result.addClass("red");
+  }
+};
 
+
+  $("#add").click(function() {
 
     console.log("Clicked Add")
 
     $("#new-counter p").text( (count += 1 ))
 
-    if (count < 10){
-      result.removeClass(".red");
-    }
-    else {
-      result.addClass("red");
-    }
+    resultColor( count, result );
 
   })
 
@@ -68,13 +72,7 @@ $(document).ready(function() {
 
     $("#new-counter p").text( (count -= 1 ))
 
-    if (count > 10){
-      result.removeClass(".red");
-    }
-    else {
-      result.addClass("red");
-    }
-
+    resultColor( count, result );
 
   })
 
