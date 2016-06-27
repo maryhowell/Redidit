@@ -25,6 +25,10 @@ p {
   font-weight: bold;
 }
 
+.red {
+  color: red;
+}
+
 /*div {
   margin: 5px;
 }*/

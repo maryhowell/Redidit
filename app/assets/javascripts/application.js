@@ -41,14 +41,21 @@
 
 var count = 0
 
-
-
-
 $(document).ready(function() {
 
   $("#add").click(function() {
+
     console.log("Clicked Add")
+
     $("#new-counter p").text( (count += 1 ))
+      var votes = $("<p>")
+    if (votes < 10){
+      result.removeClass("red");
+    }
+    else {
+      result.addClass("red");
+    }
+
   })
 
   $("#sub").click(function() {
