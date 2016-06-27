@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def home
     # if logged_in?
     #   @micropost  = current_user.microposts.build
@@ -8,5 +10,7 @@ class StaticPagesController < ApplicationController
 
   def boards
   end
+
+
 
 end
