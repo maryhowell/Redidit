@@ -41,16 +41,21 @@
 
 var count = 0
 
+
+
 $(document).ready(function() {
 
+  var result = $(".result");
+
   $("#add").click(function() {
+
 
     console.log("Clicked Add")
 
     $("#new-counter p").text( (count += 1 ))
-      var votes = $("<p>")
-    if (votes < 10){
-      result.removeClass("red");
+
+    if (count < 10){
+      result.removeClass(".red");
     }
     else {
       result.addClass("red");
@@ -60,7 +65,17 @@ $(document).ready(function() {
 
   $("#sub").click(function() {
     console.log("Clicked Subtract")
+
     $("#new-counter p").text( (count -= 1 ))
+
+    if (count > 10){
+      result.removeClass(".red");
+    }
+    else {
+      result.addClass("red");
+    }
+
+
   })
 
   $("#reset").click(function() {
