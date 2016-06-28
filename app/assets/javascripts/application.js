@@ -19,9 +19,7 @@
 
 var count = 0
 
-var postId = $(this).data("post-id")
-
-var getVotes = function(){
+var getVotes = function(postId){
   $.ajax("/posts/" + postId + "/vote_count.json"), {
     success: function(data) {
       score = data.count
@@ -62,17 +60,21 @@ $(document).ready(function() {
     }
   };
 
-  $("#add").click(function() {
+
+// upvotes
+
+  $("#add").click(function(e) {
+    e.preventDefault()
+    var postId = $(this).data("post-id")
 
     $.ajax("/posts/" + postId + "/like.json",{
       method: "PUT",
-      success: function(){  getVotes() },
+      success: function(){  getVotes(postId) },
       error: function() { alert("no upvote") }
 
     })
+      console.log("Clicked Add")
   })
-
-  console.log("Clicked Add")
 
   $("#new-counter p").text( (count += 1 ))
 
@@ -80,14 +82,22 @@ $(document).ready(function() {
 
 })
 
-$("#sub").click(function() {
-  console.log("Clicked Subtract")
+// down votes
 
-  $("#new-counter p").text( (count -= 1 ))
+$("#sub").click(function(e) {
+  e.preventDefault()
+  var postId = $(this).data("post-id")
 
-  // resultColor( count, result );
+  $.ajax("/posts/" + postId + "/dislike.json",{
+    method: "PUT",
+    success: function(){  getVotes(postId) },
+    error: function() { alert("no downvote") }
 
+  })
+    console.log("Clicked Subtracted")
 })
+
+
 
 $("#reset").click(function() {
 

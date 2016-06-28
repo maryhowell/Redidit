@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   # before_action :set_list, only: [:new, :create]
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_after_action :verify_authorized
 
   def index
     @post = current_user.posts
@@ -38,11 +39,10 @@ class PostsController < ApplicationController
 
   def upvote
     @post = Post.find(params[:id])
-    raise
     @post.upvote_by current_user
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render json: { count: @post.liked_count } }
+      format.json { render json: { count: @post.get_upvotes.size } }
     end
   end
 
@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     @post.downvote_by current_user
     respond_to do |format|
       format.html {redirect_to :back }
-      format.json { render json: { count: @post.disliked_count } }
+      format.json { render json: { count: @post.get_downvotes.size } }
     end
   end
 
