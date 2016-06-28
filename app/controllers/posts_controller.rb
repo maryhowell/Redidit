@@ -39,16 +39,19 @@ class PostsController < ApplicationController
   def upvote
     @post = Post.find(params[:id])
     @post.upvote_by current_user
-    redirect_to "/boards"
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.json { render json: { count: @post.liked_count } }
+      end
   end
 
   def downvote
     @post = Post.find(params[:id])
     @post.downvote_by current_user
-    redirect_to "/boards"
-  end
-
-
+    respond_to do |format|
+     format.html {redirect_to :back }
+     format.json { render json: { count: @post.disliked_count } }
+   end
 
   private
 

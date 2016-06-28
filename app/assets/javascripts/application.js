@@ -17,26 +17,6 @@
 //= require_tree .
 
 
-// $(function(){
-//   $(".increment").click(function(){
-//     var count = parseInt($("~ .count", this).text());
-//
-//     if($(this).hasClass("up")) {
-//       var count = count + 1;
-//
-//        $("~ .count", this).text(count);
-//     } else {
-//       var count = count - 1;
-//        $("~ .count", this).text(count);
-//     }
-//
-//     $(this).parent().addClass("bump");
-//
-//     setTimeout(function(){
-//       $(this).parent().removeClass("bump");
-//     }, 400);
-//   });
-// });
 
 
 var count = 0
@@ -90,7 +70,7 @@ resultColor = function( count, result ) {
     $(".vote-list").prepend( item )
 
     console.log("Clicked Reset")
-    var count = 0
+    count = 0
     $("#new-counter p").text( count )
 
   })

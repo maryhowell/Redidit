@@ -1,51 +1,33 @@
 <h2><%= @board.name%></h2>
-  <%= form_for @board, url: new_post_path, method: :get do |f| %>
-  <%= f.hidden_field :board_id, value: @board.id %>
-  <button class="btn btn-primary">Write a Post</button>
-  <% end %>
+<%= form_for @board, url: new_post_path, method: :get do |f| %>
+<%= f.hidden_field :board_id, value: @board.id %>
+<button class="btn btn-primary">Write a Post</button>
+<% end %>
 
 
-  <% @board.posts.each do |post| %>
-  <div class="well well-lg">
-    <tr class="active">
-      <p>Title:</p>
-      <td><%= post.title %></td>
-      <p>Content:</p>
-      <td class="well well-lg"><%= post.content %></td>
-      <div>
-        <%= link_to 'Delete', post_path(post), method: :delete, class: "btn btn-default btn-xs" %>
+<% @board.posts.each do |post| %>
+<div class="well well-lg">
+  <tr class="active">
+    <p>Title:</p>
+    <td><%= post.title %></td>
+    <p>Content:</p>
+    <td class="well well-lg"><%= post.content %></td>
+    <div>
+      <%= link_to 'Delete', post_path(post), method: :delete, class: "btn btn-default btn-xs" %>
 
-        <!-- <td><%=post.get_upvotes.size%>
-        <%= link_to like_post_path(post), method: :put do %>
-        <i class="glyphicon glyphicon-chevron-up"></i>
-        <% end %>
-      </td>
 
-      <td><%=post.get_downvotes.size%>
-      <%= link_to dislike_post_path(post), method: :put do %>
-      <i class="glyphicon glyphicon-chevron-down"></i>
-      <% end %>
-    </td> -->
+      <div id="new-counter">
 
-    <div id="new-counter">
+        <p class="result"></p>
+        <button class="btn btn-primary" id="add">+</button>
+        <button class="btn btn-primary" id="sub">-</button>
+        <button class="btn btn-primary" id="reset">Reset</button>
+        <button class="btn btn-primary" id="clearlog">Clear Log</button>
+        <ul class="vote-list"></ul>
 
-      <p class="result"></p>
-      <button class="btn btn-primary" id="add">+</button>
-      <button class="btn btn-primary" id="sub">-</button>
-      <button class="btn btn-primary" id="reset">Reset</button>
-      <button class="btn btn-primary" id="clearlog">Clear Log</button>
-      <ul class="vote-list"></ul>
+      </div>
 
-    </div>
-    <!--
-    <div class="vote circle">
-    <div class="increment up"></div>
-    <div class="increment down"></div>
-
-    <div class="count">0</div>
-  </div> -->
-
-  </div
-</tr>
-</div>
-<%end%>
+      </div
+    </tr>
+  </div>
+  <%end%>
