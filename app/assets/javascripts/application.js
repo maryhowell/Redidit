@@ -20,34 +20,37 @@
 var count = 0
 
 var getVotes = function(postId){
-  $.ajax("/posts/" + postId + "/vote_count.json"), {
+  $.ajax("/posts/" + postId + "/vote_count.json", {
     success: function(data) {
-      score = data.count
-
+      count = data.count
+      console.log("something", count)
       displayVotes()
     },
     error: function () { alert("can't get vote count") }
 
-  }
+  })
 }
 
 var displayVotes = function(){
 
   var votes = $(".result")
-
+  console.log(count)
   if (count < 10){
-    result.removeClass("red");
+    votes.removeClass("red");
   }
   else {
-    result.addClass("red");
+    votes.addClass("red");
   }
 
-  votes.text( (score) )
-  localStorage.score = score;
+  votes.text( (count) )
 }
 
 
+
+
 $(document).ready(function() {
+
+  // getVotes()
 
   var result = $(".result");
 
@@ -74,9 +77,10 @@ $(document).ready(function() {
 
     })
     console.log("Clicked Add")
+
   })
 
-  $("#new-counter p").text( (count += 1 ))
+
 
 
 
@@ -95,6 +99,8 @@ $(document).ready(function() {
     })
     console.log("Clicked Subtracted")
   })
+
+
 
 
 
@@ -117,7 +123,11 @@ $(document).ready(function() {
 
   })
 
+
+
   $("#clearlog").click(function(){
     $(".vote-list").empty();
   })
+
+
 })
