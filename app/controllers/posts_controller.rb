@@ -38,27 +38,38 @@ class PostsController < ApplicationController
 
   def upvote
     @post = Post.find(params[:id])
+    raise
     @post.upvote_by current_user
-      respond_to do |format|
-        format.html { redirect_to :back }
-        format.json { render json: { count: @post.liked_count } }
-      end
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: { count: @post.liked_count } }
+    end
   end
 
   def downvote
     @post = Post.find(params[:id])
     @post.downvote_by current_user
     respond_to do |format|
-     format.html {redirect_to :back }
-     format.json { render json: { count: @post.disliked_count } }
-   end
-
-  private
-
-  def approved_params
-    params.require(:post).permit(:title, :content, :board_id, :user_id)
+      format.html {redirect_to :back }
+      format.json { render json: { count: @post.disliked_count } }
+    end
   end
 
+    def vote_count
+      @post = Post.find(params[:id])
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.json { render json: { count: @post.score } }
+      end
+    end
 
 
-end
+    private
+
+    def approved_params
+      params.require(:post).permit(:title, :content, :board_id, :user_id)
+    end
+
+
+
+  end

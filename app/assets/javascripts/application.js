@@ -17,68 +17,97 @@
 //= require_tree .
 
 
-
-
 var count = 0
 
+var postId = $(this).data("post-id")
 
+var getVotes = function(){
+  $.ajax("/posts/" + postId + "/vote_count.json"), {
+    success: function(data) {
+      score = data.count
 
-$(document).ready(function() {
+      displayVotes()
+    },
+    error: function () { alert("can't get vote count") }
 
-  var result = $(".result");
+  }
+}
 
-resultColor = function( count, result ) {
+var displayVotes = function(){
+
+  var votes = $(".result")
+
   if (count < 10){
     result.removeClass("red");
   }
   else {
     result.addClass("red");
   }
-};
 
+  votes.text( (score) )
+  localStorage.score = score;
+}
+
+
+$(document).ready(function() {
+
+  var result = $(".result");
+
+  resultColor = function( count, result ) {
+    if (count < 10){
+      result.removeClass("red");
+    }
+    else {
+      result.addClass("red");
+    }
+  };
 
   $("#add").click(function() {
 
-    console.log("Clicked Add")
+    $.ajax("/posts/" + postId + "/like.json",{
+      method: "PUT",
+      success: function(){  getVotes() },
+      error: function() { alert("no upvote") }
 
-    $("#new-counter p").text( (count += 1 ))
-
-    resultColor( count, result );
-
+    })
   })
 
-  $("#sub").click(function() {
-    console.log("Clicked Subtract")
+  console.log("Clicked Add")
 
-    $("#new-counter p").text( (count -= 1 ))
+  $("#new-counter p").text( (count += 1 ))
 
-    resultColor( count, result );
+  // resultColor( count, result );
 
-  })
+})
 
-  $("#reset").click(function() {
+$("#sub").click(function() {
+  console.log("Clicked Subtract")
 
-    now = new Date();
-    var date = now.toLocaleDateString();
-    var time = now.toLocaleTimeString();
+  $("#new-counter p").text( (count -= 1 ))
 
-    var votes = $("<p>")
-    var vote_count = votes.text()
-    var item = $("<li class='record'>")
-    item.append( $("<span>").text("Reset from " + vote_count + " at " + time + " on " +  date))
+  // resultColor( count, result );
 
-    $(".vote-list").prepend( item )
+})
 
-    console.log("Clicked Reset")
-    count = 0
-    $("#new-counter p").text( count )
+$("#reset").click(function() {
 
-  })
+  now = new Date();
+  var date = now.toLocaleDateString();
+  var time = now.toLocaleTimeString();
 
-  $("#clearlog").click(function(){
-    $(".vote-list").empty();
-  })
+  var votes = $("<p>")
+  var vote_count = votes.text()
+  var item = $("<li class='record'>")
+  item.append( $("<span>").text("Reset from " + vote_count + " at " + time + " on " +  date))
 
+  $(".vote-list").prepend( item )
 
+  console.log("Clicked Reset")
+  count = 0
+  $("#new-counter p").text( count )
 
+})
+
+$("#clearlog").click(function(){
+  $(".vote-list").empty();
 })

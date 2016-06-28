@@ -1,25 +1,25 @@
-$(document).ready(function() {
-
-  $("#add").click(function() {
-    var check = $("<i>").addClass("glyphicon").addClass("glyphicon glyphicon-triangle-top")
-
-    // $(this).closest("tr").removeClass("incomplete")
-  })
-
-  $("#sub").click(function() {
-    var check = $("<i>").addClass("glyphicon").addClass("glyphicon glyphicon-triangle-bottom")
-
-    // $(this).closest("tr").removeClass("incomplete")
-
-    $.ajax("/posts/" + post_id + "/finish.json", {
-      method: "PATCH"
-    })
-
-  })
-
-
-
-})
+// $(document).ready(function() {
+//
+//   $("#add").click(function() {
+//     var check = $("<i>").addClass("glyphicon").addClass("glyphicon glyphicon-triangle-top")
+//
+//     // $(this).closest("tr").removeClass("incomplete")
+//   })
+//
+//   $("#sub").click(function() {
+//     var check = $("<i>").addClass("glyphicon").addClass("glyphicon glyphicon-triangle-bottom")
+//
+//     // $(this).closest("tr").removeClass("incomplete")
+//
+//     $.ajax("/posts/" + post_id + "/finish.json", {
+//       method: "PATCH"
+//     })
+//
+//   })
+//
+//
+//
+// })
 
 // $(this).closest("")
 

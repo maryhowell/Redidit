@@ -19,8 +19,17 @@
       <div id="new-counter">
 
         <p class="result"></p>
-        <button class="btn btn-primary" id="add">+</button>
-        <button class="btn btn-primary" id="sub">-</button>
+
+         <!-- <span class= "like-<%= post.id %>"> -->
+        <button class="btn btn-primary" id="add" data-post-id = "<%= post.id %>">+</button>
+        <%= link_to like_post_path(post), method: :put, remote: true, class: 'like' do %>
+        <%end%>
+
+        <!-- <span class= "dislike-<%= post.id %>"> -->
+        <button class="btn btn-primary" id="sub" data-post-id = "<%= post.id %>">-</button>
+        <%= link_to dislike_post_path(post), method: :put, remote: true, class: 'dislike' do %>
+        <%end%>
+
         <button class="btn btn-primary" id="reset">Reset</button>
         <button class="btn btn-primary" id="clearlog">Clear Log</button>
         <ul class="vote-list"></ul>

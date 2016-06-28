@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       member do
         put "like", to: "posts#upvote"
         put "dislike", to: "posts#downvote"
+        get "vote_count", to: "post#vote_count"
       end
     end
 
