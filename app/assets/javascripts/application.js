@@ -61,7 +61,7 @@ $(document).ready(function() {
   };
 
 
-// upvotes
+  // upvotes
 
   $("#add").click(function(e) {
     e.preventDefault()
@@ -73,51 +73,51 @@ $(document).ready(function() {
       error: function() { alert("no upvote") }
 
     })
-      console.log("Clicked Add")
+    console.log("Clicked Add")
   })
 
   $("#new-counter p").text( (count += 1 ))
 
-  // resultColor( count, result );
 
-})
 
-// down votes
 
-$("#sub").click(function(e) {
-  e.preventDefault()
-  var postId = $(this).data("post-id")
+  // down votes
 
-  $.ajax("/posts/" + postId + "/dislike.json",{
-    method: "PUT",
-    success: function(){  getVotes(postId) },
-    error: function() { alert("no downvote") }
+  $("#sub").click(function(e) {
+    e.preventDefault()
+    var postId = $(this).data("post-id")
+
+    $.ajax("/posts/" + postId + "/dislike.json",{
+      method: "PUT",
+      success: function(){  getVotes(postId) },
+      error: function() { alert("no downvote") }
+
+    })
+    console.log("Clicked Subtracted")
+  })
+
+
+
+  $("#reset").click(function() {
+
+    now = new Date();
+    var date = now.toLocaleDateString();
+    var time = now.toLocaleTimeString();
+
+    var votes = $("<p>")
+    var vote_count = votes.text()
+    var item = $("<li class='record'>")
+    item.append( $("<span>").text("Reset from " + vote_count + " at " + time + " on " +  date))
+
+    $(".vote-list").prepend( item )
+
+    console.log("Clicked Reset")
+    count = 0
+    $("#new-counter p").text( count )
 
   })
-    console.log("Clicked Subtracted")
-})
 
-
-
-$("#reset").click(function() {
-
-  now = new Date();
-  var date = now.toLocaleDateString();
-  var time = now.toLocaleTimeString();
-
-  var votes = $("<p>")
-  var vote_count = votes.text()
-  var item = $("<li class='record'>")
-  item.append( $("<span>").text("Reset from " + vote_count + " at " + time + " on " +  date))
-
-  $(".vote-list").prepend( item )
-
-  console.log("Clicked Reset")
-  count = 0
-  $("#new-counter p").text( count )
-
-})
-
-$("#clearlog").click(function(){
-  $(".vote-list").empty();
+  $("#clearlog").click(function(){
+    $(".vote-list").empty();
+  })
 })
